@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body>
+<header>
+    <th:block th:include="~{fragments/nav-bar}"></th:block>
+</header>
+<main>
+    <div class="video-background-holder">
+        <div class="video-background-overlay"></div>
+        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <source th:src="@{https://res.cloudinary.com/dqrhb3lnc/video/upload/v1596456270/cellini_750x900_xgebq1.mp4}"
+                    type="video/mp4">
+        </video>
+        <div class="video-background-content container h-100">
+            <div class="d-flex h-100 text-center align-items-center">
+                <div class="w-100 text-white">
+                    <h1 class="text-black">Welcome to the WatchUSeek website!</h1>
+                    <hr class="bg-dark hr-2"/>
+                    <h2 class="text-black"><a class="text-black" th:href="@{/users/login}">Login</a> if you have an
+                        account.</h2>
+                    <h2 class="text-black"><a class="text-black" th:href="@{/users/register}">Register</a> if you
+                        don't have an account.</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<footer>
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+</body>
+</html>
