@@ -17,14 +17,6 @@ public class User extends BaseEntity implements UserDetails {
     private String profilePictureUrl;
     private Set<Watch> watches;
 
-
-
-
-
-
-
-
-
     public User() {
 
     }

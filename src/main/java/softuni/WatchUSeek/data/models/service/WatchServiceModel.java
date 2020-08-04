@@ -1,10 +1,10 @@
-package softuni.WatchUSeek.data.entities;
+package softuni.WatchUSeek.data.models.service;
 
-import javax.persistence.*;
+import softuni.WatchUSeek.data.entities.Gender;
+import softuni.WatchUSeek.data.entities.User;
 
-@Entity
-@Table(name = "watches")
-public class Watch extends BaseEntity {
+public class WatchServiceModel extends BaseServiceModel {
+
     private String manufacturer;
     private String refNumber;
     private Integer year;
@@ -15,13 +15,9 @@ public class Watch extends BaseEntity {
     private String contactNumber;
     private Gender gender;
 
-
-
-
-    public Watch() {
+    public WatchServiceModel() {
     }
 
-    @Column(name = "manufacturer", nullable = false)
     public String getManufacturer() {
         return manufacturer;
     }
@@ -30,7 +26,6 @@ public class Watch extends BaseEntity {
         this.manufacturer = manufacturer;
     }
 
-    @Column(name = "refNumber", nullable = false)
     public String getRefNumber() {
         return refNumber;
     }
@@ -39,7 +34,6 @@ public class Watch extends BaseEntity {
         this.refNumber = refNumber;
     }
 
-    @Column(name = "year", nullable = false)
     public Integer getYear() {
         return year;
     }
@@ -48,25 +42,6 @@ public class Watch extends BaseEntity {
         this.year = year;
     }
 
-    @Column(name = "price", nullable = false)
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    @Column(name = "description", nullable = false)
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Column(name = "pictureUrl", nullable = true)
     public String getPicUrl() {
         return picUrl;
     }
@@ -75,8 +50,22 @@ public class Watch extends BaseEntity {
         this.picUrl = picUrl;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public User getPostedBy() {
         return postedBy;
     }
@@ -85,7 +74,6 @@ public class Watch extends BaseEntity {
         this.postedBy = postedBy;
     }
 
-    @Column(name = "contactNumber", nullable = false)
     public String getContactNumber() {
         return contactNumber;
     }
@@ -94,8 +82,6 @@ public class Watch extends BaseEntity {
         this.contactNumber = contactNumber;
     }
 
-    @Column(name = "gender", nullable = false)
-    @Enumerated(EnumType.STRING)
     public Gender getGender() {
         return gender;
     }

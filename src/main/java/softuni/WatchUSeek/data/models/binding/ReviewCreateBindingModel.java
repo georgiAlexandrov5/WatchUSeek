@@ -1,21 +1,14 @@
-package softuni.WatchUSeek.data.entities;
+package softuni.WatchUSeek.data.models.binding;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "reviews")
-public class Review extends BaseEntity {
+public class ReviewCreateBindingModel {
     private String title;
     private String description;
     private Integer rating;
     private String pictureUrl;
 
-    public Review() {
+    public ReviewCreateBindingModel() {
     }
 
-    @Column(name = "title", nullable = false)
     public String getTitle() {
         return title;
     }
@@ -24,7 +17,6 @@ public class Review extends BaseEntity {
         this.title = title;
     }
 
-    @Column(name = "description", nullable = false)
     public String getDescription() {
         return description;
     }
@@ -33,7 +25,6 @@ public class Review extends BaseEntity {
         this.description = description;
     }
 
-    @Column(name = "rating", nullable = false)
     public Integer getRating() {
         return rating;
     }
@@ -42,7 +33,6 @@ public class Review extends BaseEntity {
         this.rating = rating;
     }
 
-    @Column(name = "pictureUrl")
     public String getPictureUrl() {
         return pictureUrl;
     }

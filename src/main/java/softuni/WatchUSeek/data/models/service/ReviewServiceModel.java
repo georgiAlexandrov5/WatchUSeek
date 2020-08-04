@@ -1,21 +1,15 @@
-package softuni.WatchUSeek.data.entities;
+package softuni.WatchUSeek.data.models.service;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+public class ReviewServiceModel extends BaseServiceModel {
 
-@Entity
-@Table(name = "reviews")
-public class Review extends BaseEntity {
     private String title;
     private String description;
     private Integer rating;
     private String pictureUrl;
 
-    public Review() {
+    public ReviewServiceModel() {
     }
 
-    @Column(name = "title", nullable = false)
     public String getTitle() {
         return title;
     }
@@ -24,7 +18,6 @@ public class Review extends BaseEntity {
         this.title = title;
     }
 
-    @Column(name = "description", nullable = false)
     public String getDescription() {
         return description;
     }
@@ -33,7 +26,6 @@ public class Review extends BaseEntity {
         this.description = description;
     }
 
-    @Column(name = "rating", nullable = false)
     public Integer getRating() {
         return rating;
     }
@@ -42,7 +34,6 @@ public class Review extends BaseEntity {
         this.rating = rating;
     }
 
-    @Column(name = "pictureUrl")
     public String getPictureUrl() {
         return pictureUrl;
     }
