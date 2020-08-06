@@ -5,8 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "watches")
 public class Watch extends BaseEntity {
-    private String manufacturer;
     private String refNumber;
+    private String manufacturer;
     private Integer year;
     private String picUrl;
     private double price;

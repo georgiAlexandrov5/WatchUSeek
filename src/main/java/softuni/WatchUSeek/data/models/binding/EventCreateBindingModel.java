@@ -1,21 +1,14 @@
-package softuni.WatchUSeek.data.entities;
+package softuni.WatchUSeek.data.models.binding;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "events")
-public class Event extends BaseEntity{
+public class EventCreateBindingModel {
 
     private String title;
     private String description;
     private String location;
 
-    public Event() {
+    public EventCreateBindingModel() {
     }
 
-    @Column(name = "title", nullable = false)
     public String getTitle() {
         return title;
     }
@@ -24,7 +17,6 @@ public class Event extends BaseEntity{
         this.title = title;
     }
 
-    @Column(name = "description", nullable = false)
     public String getDescription() {
         return description;
     }
@@ -33,7 +25,6 @@ public class Event extends BaseEntity{
         this.description = description;
     }
 
-    @Column(name = "location", nullable = false)
     public String getLocation() {
         return location;
     }
