@@ -24,7 +24,12 @@ textarea {
     resize: none;
 }
 
-.footer { margin: 0 0 -50px 0;}
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;}
 
 
 :root {

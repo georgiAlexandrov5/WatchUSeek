@@ -27,10 +27,14 @@
 }
 .bg-image-home {
     background-image: url('https://image.freepik.com/free-photo/close-up-clockwise-black-clock-face-background-wristwatch-retro-style_9635-1157.jpg');
-    background-size: cover;
+    padding-top: 65px;
+    min-height: 380px;
     background-position: center;
-
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
     height: 100%;
+    width: 100%;
 }
 
 .bg-image-details{
@@ -39,20 +43,47 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
+    position: absolute;
 }
 
 .bg-image-createStrap{
     background-image: url('https://watchgecko.sirv.com/wp/2020/05/Leather-Straps-Banner-GMT.jpg');
+    padding-top: 65px;
     min-height: 380px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.bg-image-createEvent{
+    background-image: url('https://res.cloudinary.com/dqrhb3lnc/image/upload/v1596402450/samples/ecommerce/analog-classic.jpg');
+    padding-top: 65px;
+    min-height: 380px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+}
+.ow {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.max-width{
+    max-width: 450px;
+    position: absolute;
 }
 
 .bg-image-create {
     background-image: url('https://theoharris-pgrpc7nztxtdw9cw.stackpathdns.com/wp-content/uploads/watch101-03-28-18-1.jpg');
+    padding-top: 65px;
     min-height: 380px;
     background-position: center;
     background-repeat: no-repeat;

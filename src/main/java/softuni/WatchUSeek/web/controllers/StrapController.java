@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import softuni.WatchUSeek.data.models.binding.StrapCreateBindingModel;
 import softuni.WatchUSeek.data.models.service.StrapServiceModel;
+import softuni.WatchUSeek.data.models.view.StrapViewModel;
 import softuni.WatchUSeek.errors.StrapNotFoundException;
 import softuni.WatchUSeek.service.StrapService;
 import softuni.WatchUSeek.utils.CloudinaryService;
@@ -81,7 +82,7 @@ public class StrapController extends BaseController {
     @PreAuthorize("isAuthenticated()")
     @PageTitle("Strap Details")
     public ModelAndView strapDetails(@PathVariable String id, ModelAndView modelAndView) {
-        StrapServiceModel strap = this.strapService.findStrapById(id);
+        StrapViewModel strap = this.modelMapper.map(this.strapService.findStrapById(id), StrapViewModel.class);
         modelAndView.addObject("strap",strap);
         return super.view("strap/details-strap", modelAndView);
     }

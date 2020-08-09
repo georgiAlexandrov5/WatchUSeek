@@ -1,6 +1,7 @@
 package softuni.WatchUSeek.data.models.view;
 
 public class StrapViewModel {
+    private String id;
     private String name;
     private String material;
     private double price;
@@ -9,6 +10,14 @@ public class StrapViewModel {
     private String picUrl;
 
     public StrapViewModel() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

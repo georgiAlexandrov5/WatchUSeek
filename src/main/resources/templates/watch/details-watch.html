@@ -10,7 +10,7 @@
         <th:block th:include="~{fragments/nav-bar}"></th:block>
     </header>
     <main class="mt-3">
-        <div class="bg-image-details text-center">
+        <div class="bg-image-home text-center">            <span style="visibility: hidden">....</span>
             <div class="text-center mt-5">
                 <img th:height="200" th:width="200" th:src="${watch.picUrl}">
             </div>
@@ -55,7 +55,7 @@
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </th:block>
-                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                <th:block th:if="${enableEdit}">
                     <form th:action="@{/watches/edit/{id}(id=${watch.id})}" th:method="get">
                         <button type="submit" class="btn btn-danger">Edit Watch</button>
                     </form>

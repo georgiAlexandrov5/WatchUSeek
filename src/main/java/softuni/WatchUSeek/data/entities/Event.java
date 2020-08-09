@@ -1,8 +1,10 @@
 package softuni.WatchUSeek.data.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "events")
@@ -11,6 +13,7 @@ public class Event extends BaseEntity{
     private String title;
     private String description;
     private String location;
+    private LocalDate date;
 
     public Event() {
     }
@@ -40,5 +43,15 @@ public class Event extends BaseEntity{
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    @Column(name = "date", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import softuni.WatchUSeek.data.entities.User;
 import softuni.WatchUSeek.data.models.binding.WatchCreateBindingModel;
+import softuni.WatchUSeek.data.models.service.UserServiceModel;
 import softuni.WatchUSeek.data.models.service.WatchServiceModel;
+import softuni.WatchUSeek.data.models.view.WatchViewModel;
 import softuni.WatchUSeek.errors.WatchNotFoundException;
 import softuni.WatchUSeek.service.UserService;
 import softuni.WatchUSeek.service.WatchService;
@@ -49,7 +51,9 @@ public class WatchController extends BaseController {
                                          Principal principal) {
 
         WatchServiceModel watchServiceModel = this.modelMapper.map(model, WatchServiceModel.class);
+        UserServiceModel user = this.userService.findUserByUsername(principal.getName());
 
+        watchServiceModel.setUser(this.modelMapper.map(user, User.class));
         this.watchService.addWatch(watchServiceModel);
 
         return super.redirect("/watches/all");
@@ -65,8 +69,9 @@ public class WatchController extends BaseController {
 
     @GetMapping("/edit/{id}")
     @PageTitle("Edit Watch")
-    public ModelAndView editWatch(@PathVariable String id, ModelAndView modelAndView) {
+    public ModelAndView editWatch(@PathVariable String id, ModelAndView modelAndView, Principal principal) {
         WatchServiceModel watchServiceModel = this.watchService.findWatchById(id);
+
 
         modelAndView.addObject("watch", watchServiceModel);
         modelAndView.addObject("watchId", id);
@@ -85,8 +90,16 @@ public class WatchController extends BaseController {
     @GetMapping("/details/{id}")
     @PreAuthorize("isAuthenticated()")
     @PageTitle("Watch Details")
-    public ModelAndView watchDetails(@PathVariable String id, ModelAndView modelAndView) {
-        WatchServiceModel watch = this.watchService.findWatchById(id);
+    public ModelAndView watchDetails(@PathVariable String id, ModelAndView modelAndView, Principal principal) {
+
+        WatchViewModel watch = this.modelMapper.map(this.watchService.findWatchById(id),
+                                        WatchViewModel.class);
+
+        boolean enableEdit = watch.getUser().getUsername()
+                .equals(userService.findUserByUsername(principal.getName()).getUsername());
+        System.out.println(enableEdit);
+
+        modelAndView.addObject("enableEdit", enableEdit);
         modelAndView.addObject("watch", watch);
         return super.view("watch/details-watch", modelAndView);
     }

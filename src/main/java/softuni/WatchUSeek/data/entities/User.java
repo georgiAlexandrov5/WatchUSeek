@@ -14,6 +14,7 @@ public class User extends BaseEntity implements UserDetails {
     private String email;
     private String password;
     private Set<Role> authorities;
+    private Set<Watch> watches;
 
     public User() {
 
@@ -21,6 +22,7 @@ public class User extends BaseEntity implements UserDetails {
 
 
     @Column(name = "username", nullable = false, unique = true, updatable = false)
+    
     public String getUsername() {
         return username;
     }
@@ -71,7 +73,14 @@ public class User extends BaseEntity implements UserDetails {
         this.authorities = authorities;
     }
 
+    @OneToMany(mappedBy = "user", targetEntity = Watch.class)
+    public Set<Watch> getWatches() {
+        return watches;
+    }
 
+    public void setWatches(Set<Watch> watches) {
+        this.watches = watches;
+    }
 
     @Override
     @Transient

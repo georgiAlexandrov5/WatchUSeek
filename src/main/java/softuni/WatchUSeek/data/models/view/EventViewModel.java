@@ -1,10 +1,17 @@
 package softuni.WatchUSeek.data.models.view;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+import java.util.Date;
+
 public class EventViewModel {
 
     private String title;
     private String description;
     private String location;
+
+    private Date date;
 
     public EventViewModel() {
     }
@@ -31,5 +38,13 @@ public class EventViewModel {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

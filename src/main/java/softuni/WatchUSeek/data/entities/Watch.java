@@ -13,6 +13,7 @@ public class Watch extends BaseEntity {
     private String description;
     private String contactNumber;
     private String gender;
+    private User user;
 
 
 
@@ -92,5 +93,15 @@ public class Watch extends BaseEntity {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

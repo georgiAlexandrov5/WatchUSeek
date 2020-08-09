@@ -2,6 +2,7 @@ package softuni.WatchUSeek.web.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +17,7 @@ import softuni.WatchUSeek.repositories.EventRepository;
 import softuni.WatchUSeek.service.EventService;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -26,10 +28,11 @@ public class EventController extends BaseController {
     private final EventService eventService;
 
     @Autowired
-    public EventController(ModelMapper mapper,EventService eventService) {
+    public EventController(ModelMapper mapper, EventService eventService) {
         this.mapper = mapper;
         this.eventService = eventService;
     }
+
 
     @GetMapping("/add")
     @PageTitle("Add Event")
@@ -37,8 +40,9 @@ public class EventController extends BaseController {
         return view("event/add-event");
     }
 
+
     @PostMapping("/add")
-    public ModelAndView addEventConfirm(@Validated @ModelAttribute(name = "model") EventCreateBindingModel model,
+    public ModelAndView addEventConfirm(@ModelAttribute(name = "model") EventCreateBindingModel model,
                                         Principal principal) {
 
         EventServiceModel eventServiceModel = this.mapper.map(model, EventServiceModel.class);
@@ -46,7 +50,7 @@ public class EventController extends BaseController {
         this.eventService.createEvent(eventServiceModel);
         System.out.println(principal);
 
-        return super.redirect("/watches/all");
+        return super.redirect("/events/all");
     }
 
     @GetMapping("/all")

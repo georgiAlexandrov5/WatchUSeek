@@ -2,8 +2,10 @@ package softuni.WatchUSeek.data.models.view;
 
 import softuni.WatchUSeek.data.entities.Gender;
 import softuni.WatchUSeek.data.entities.User;
+import softuni.WatchUSeek.data.models.service.BaseServiceModel;
 
 public class WatchViewModel {
+    private String id;
     private String manufacturer;
     private String refNumber;
     private Integer year;
@@ -12,8 +14,17 @@ public class WatchViewModel {
     private String description;
     private String contactNumber;
     private String gender;
+    private User user;
 
     public WatchViewModel() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getManufacturer() {
@@ -78,5 +89,13 @@ public class WatchViewModel {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

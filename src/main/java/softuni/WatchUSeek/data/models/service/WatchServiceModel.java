@@ -14,6 +14,9 @@ public class WatchServiceModel extends BaseServiceModel {
     private String contactNumber;
     private String gender;
 
+
+    private User user;
+
     public WatchServiceModel() {
     }
 
@@ -80,4 +83,13 @@ public class WatchServiceModel extends BaseServiceModel {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }
