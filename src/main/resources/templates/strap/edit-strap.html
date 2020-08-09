@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body>
+<div class="container-fluid">
+    <header>
+        <th:block th:include="~{fragments/nav-bar}"></th:block>
+    </header>
+    <main class="mt-5">
+        <div class="bg-image-createStrap">
+            <span style="visibility: hidden">....</span>
+            <h1 class="text-center font-weight-bold text-white">Edit Strap</h1>
+            <hr class="hr-2 bg-dark w-25">
+            <form id="add-product-form" class="form w-25 mx-auto" th:action="@{/straps/edit/{id}(id=${strapId})}"
+                  method="post" enctype="multipart/form-data"><input type="hidden" name="_csrf"
+                                                                     value="c686cd14-a7f9-4216-8009-c093b7d3df86">
+                <div class="form-group">
+                    <label for="strap-name" class="mb-1 text-white">Name</label>
+                    <input type="text" class="form-control mt-1" id="strap-name" name="name"
+                           th:value="${strap.name}">
+                </div>
+                <div class="form-group">
+                    <label for="strap-material" class="mb-1 text-white">Material</label>
+                    <input type="text" class="form-control mt-1" id="strap-material" name="material"
+                           th:value="${strap.material}">
+                </div>
+                <div class="form-group">
+                    <label for="strap-price" class="mb-1 text-white">Price</label>
+                    <input type="text" class="form-control mt-1" id="strap-price" name="price"
+                           th:value="${strap.price}">
+                </div>
+                <div class="form-group">
+                    <label for="strap-phone" class="mb-1 text-white">Phone</label>
+                    <input type="text" class="form-control mt-1" id="strap-phone" name="phone"
+                           th:value="${strap.phone}">
+                </div>
+                <div class="form-group">
+                    <label for="strap-description" class="mb-1 text-white">Description</label>
+                    <input type="text" class="form-control mt-1" id="strap-description" name="description"
+                           th:value="${strap.description}">
+                </div>
+                <div class="form-group">
+                    <label for="strap-picUrl" class="mb-1 text-white">Picture</label>
+                    <input type="text" class="form-control mt-1" id="strap-picUrl" name="picUrl"
+                           th:value="${strap.picUrl}">
+                </div>
+                <hr class="hr-2 bg-dark">
+                <div class="button-holder d-flex justify-content-center">
+                    <button type="submit" class="btn bg-hero ml-4 glow-button">Edit Strap</button>
+                </div>
+            </form>
+            <span style="visibility: hidden">....</span>
+        </div>
+    </main>
+    <footer>
+        <th:block th:include="~{fragments/footer}"></th:block>
+    </footer>
+</div>
+</body>
+</html>

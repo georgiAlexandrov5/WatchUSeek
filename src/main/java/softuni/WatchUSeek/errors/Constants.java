@@ -20,4 +20,10 @@ public class Constants {
 
     public static final String INCORRECT_ID = "Incorrect id!";
 
+    public static final String EVENT_NOT_FOUND = "Event with this name doesn't exist!";
+
+    public static final String REVIEW_NOT_FOUND = "Review with this name doesn't exist!";
+
+
+
 }

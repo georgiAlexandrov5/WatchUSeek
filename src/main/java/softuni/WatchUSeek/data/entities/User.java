@@ -14,12 +14,11 @@ public class User extends BaseEntity implements UserDetails {
     private String email;
     private String password;
     private Set<Role> authorities;
-    private String profilePictureUrl;
-    private Set<Watch> watches;
 
     public User() {
 
     }
+
 
     @Column(name = "username", nullable = false, unique = true, updatable = false)
     public String getUsername() {
@@ -50,15 +49,6 @@ public class User extends BaseEntity implements UserDetails {
         this.password = password;
     }
 
-    @Column(name = "profile_picture_url")
-    public String getProfilePictureUrl() {
-        return profilePictureUrl;
-    }
-
-    public void setProfilePictureUrl(String profilePictureUrl) {
-        this.profilePictureUrl = profilePictureUrl;
-    }
-
 
     @Override
     @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
@@ -82,14 +72,6 @@ public class User extends BaseEntity implements UserDetails {
     }
 
 
-    @OneToMany(targetEntity = Watch.class, mappedBy = "postedBy",cascade = CascadeType.ALL)
-    public Set<Watch> getWatches() {
-        return watches;
-    }
-
-    public void setWatches(Set<Watch> watches) {
-        this.watches = watches;
-    }
 
     @Override
     @Transient

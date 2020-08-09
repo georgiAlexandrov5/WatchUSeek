@@ -11,9 +11,8 @@ public class WatchServiceModel extends BaseServiceModel {
     private String picUrl;
     private double price;
     private String description;
-    private User postedBy;
     private String contactNumber;
-    private Gender gender;
+    private String gender;
 
     public WatchServiceModel() {
     }
@@ -66,14 +65,6 @@ public class WatchServiceModel extends BaseServiceModel {
         this.description = description;
     }
 
-    public User getPostedBy() {
-        return postedBy;
-    }
-
-    public void setPostedBy(User postedBy) {
-        this.postedBy = postedBy;
-    }
-
     public String getContactNumber() {
         return contactNumber;
     }
@@ -82,11 +73,11 @@ public class WatchServiceModel extends BaseServiceModel {
         this.contactNumber = contactNumber;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 }

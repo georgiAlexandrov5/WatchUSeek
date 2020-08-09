@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import softuni.WatchUSeek.data.entities.User;
 import softuni.WatchUSeek.data.models.service.UserServiceModel;
+import softuni.WatchUSeek.errors.Constants;
 import softuni.WatchUSeek.errors.UserNotFoundException;
 import softuni.WatchUSeek.repositories.UserRepository;
 import softuni.WatchUSeek.service.RoleService;
@@ -92,36 +93,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void setUserRole(String id, String role) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(INCORRECT_ID));
-
-        UserServiceModel userServiceModel = mapper.map(user, UserServiceModel.class);
-        userServiceModel.getAuthorities().clear();
-
-        switch (role) {
-            case "user":
-                userServiceModel.getAuthorities().add(roleService.findByAuthority(ROLE_USER));
-                break;
-            case "moderator":
-                userServiceModel.getAuthorities().add(roleService.findByAuthority(ROLE_USER));
-                userServiceModel.getAuthorities().add(roleService.findByAuthority(ROLE_MODERATOR));
-                break;
-            case "admin":
-                userServiceModel.getAuthorities().add(roleService.findByAuthority(ROLE_USER));
-                userServiceModel.getAuthorities().add(roleService.findByAuthority(ROLE_MODERATOR));
-                userServiceModel.getAuthorities().add(roleService.findByAuthority(ROLE_ADMIN));
-                break;
-        }
+    public void makeAdmin(String id) {
+        UserServiceModel userServiceModel = findUserByIdAndGetAuth(id);
+        userServiceModel.getAuthorities().add(this.roleService.findByAuthority(ROLE_ADMIN));
 
         this.userRepository.saveAndFlush(this.mapper.map(userServiceModel, User.class));
     }
+
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository
                 .findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(USERNAME_NOT_FOUND));
+    }
+
+    public UserServiceModel findUserByIdAndGetAuth(String id) {
+        User user = this.userRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException(Constants.USER_ID_NOT_FOUND));
+
+        UserServiceModel userServiceModel = this.mapper.map(user, UserServiceModel.class);
+        userServiceModel.getAuthorities().clear();
+
+        userServiceModel.getAuthorities().add(this.roleService.findByAuthority("ROLE_USER"));
+
+        return userServiceModel;
     }
 
 }

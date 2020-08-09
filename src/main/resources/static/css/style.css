@@ -3,6 +3,8 @@
     color: white;
 }
 
+
+
 .text-hero {
     color: white;
 }
@@ -21,6 +23,9 @@
 textarea {
     resize: none;
 }
+
+.footer { margin: 0 0 -50px 0;}
+
 
 :root {
     --input-padding-x: 1.5rem;

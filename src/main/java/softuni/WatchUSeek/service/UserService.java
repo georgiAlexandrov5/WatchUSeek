@@ -15,7 +15,7 @@ public interface UserService extends UserDetailsService {
 
     List<UserServiceModel> findAll();
 
-    void setUserRole(String id, String role);
+    void makeAdmin(String id);
 
 
 }

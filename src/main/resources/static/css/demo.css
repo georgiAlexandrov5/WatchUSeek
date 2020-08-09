@@ -13,19 +13,46 @@
 
 }
 
+
 .bg-image {
-    background-image: url('https://source.unsplash.com/WEQbe2jBg40/600x1200');
-    background-size: cover;
-    background-position: center;
-}
-.bg-image-home {
-    background-image: url('https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/4005014/910/609/m2/fpnw/wm1/xdj08fgivxc1b3opglokwltqwb3zgmdkjdzjhtqbivchjrguqtotieuxtezbvnzt-.jpg?1518607030&s=3c4506315b9d487f9a185ab432f5b5b4');
+    background-image: url('https://i.pinimg.com/originals/d6/8b/07/d68b07a7c30026ed9fce99e27ba85f1a.jpg');
     background-size: cover;
     background-position: center;
 }
 
+.bg-image-edit {
+    background-image: url('https://k8q7r7a2.stackpathcdn.com/wp-content/uploads/2020/05/Best-of-independent-watchmaking-through-caseback-movement.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.bg-image-home {
+    background-image: url('https://image.freepik.com/free-photo/close-up-clockwise-black-clock-face-background-wristwatch-retro-style_9635-1157.jpg');
+    background-size: cover;
+    background-position: center;
+
+    height: 100%;
+}
+
+.bg-image-details{
+    background-image: url('https://image.freepik.com/free-photo/close-up-clockwise-black-clock-face-background-wristwatch-retro-style_9635-1157.jpg');
+    min-height: 380px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.bg-image-createStrap{
+    background-image: url('https://watchgecko.sirv.com/wp/2020/05/Leather-Straps-Banner-GMT.jpg');
+    min-height: 380px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
 .bg-image-create {
-    background-image: url('https://i.pinimg.com/originals/1f/8c/19/1f8c196f70fc698ac5360d56286e0bec.jpg');
+    background-image: url('https://theoharris-pgrpc7nztxtdw9cw.stackpathdns.com/wp-content/uploads/watch101-03-28-18-1.jpg');
     min-height: 380px;
     background-position: center;
     background-repeat: no-repeat;
@@ -34,7 +61,7 @@
 }
 
 .bg-image-quote-all {
-    background-image: url('https://media.istockphoto.com/photos/cooking-background-picture-id867342058');
+    background-image: url('https://theoharris-pgrpc7nztxtdw9cw.stackpathdns.com/wp-content/uploads/watch101-03-28-18-1.jpg');
     min-height: 380px;
     background-position: center;
     background-repeat: no-repeat;
@@ -128,6 +155,11 @@
     padding-bottom: calc(var(--input-padding-y) / 3);
     font-size: 12px;
     color: #777;
+}
+.white{
+    color: white;
+    position: center
+;
 }
 
 

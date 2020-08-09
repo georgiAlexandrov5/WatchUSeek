@@ -65,6 +65,7 @@ public class StrapServiceImpl implements StrapService {
         strap.setPhone(strapServiceModel.getPhone());
         strap.setPicUrl(strapServiceModel.getPicUrl());
         strap.setPrice(strapServiceModel.getPrice());
+        strapRepository.save(strap);
     }
 
     @Override

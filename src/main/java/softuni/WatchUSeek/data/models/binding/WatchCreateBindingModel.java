@@ -1,5 +1,6 @@
 package softuni.WatchUSeek.data.models.binding;
 
+import org.springframework.web.multipart.MultipartFile;
 import softuni.WatchUSeek.data.entities.Gender;
 import softuni.WatchUSeek.data.entities.User;
 
@@ -10,9 +11,8 @@ public class WatchCreateBindingModel {
     private String picUrl;
     private double price;
     private String description;
-    private User postedBy;
     private String contactNumber;
-    private Gender gender;
+    private String gender;
 
     public WatchCreateBindingModel() {
     }
@@ -65,13 +65,6 @@ public class WatchCreateBindingModel {
         this.description = description;
     }
 
-    public User getPostedBy() {
-        return postedBy;
-    }
-
-    public void setPostedBy(User postedBy) {
-        this.postedBy = postedBy;
-    }
 
     public String getContactNumber() {
         return contactNumber;
@@ -81,11 +74,11 @@ public class WatchCreateBindingModel {
         this.contactNumber = contactNumber;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 }

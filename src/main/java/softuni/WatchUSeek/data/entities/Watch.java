@@ -11,9 +11,8 @@ public class Watch extends BaseEntity {
     private String picUrl;
     private double price;
     private String description;
-    private User postedBy;
     private String contactNumber;
-    private Gender gender;
+    private String gender;
 
 
 
@@ -75,15 +74,7 @@ public class Watch extends BaseEntity {
         this.picUrl = picUrl;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    public User getPostedBy() {
-        return postedBy;
-    }
 
-    public void setPostedBy(User postedBy) {
-        this.postedBy = postedBy;
-    }
 
     @Column(name = "contactNumber", nullable = false)
     public String getContactNumber() {
@@ -95,12 +86,11 @@ public class Watch extends BaseEntity {
     }
 
     @Column(name = "gender", nullable = false)
-    @Enumerated(EnumType.STRING)
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 }

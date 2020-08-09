@@ -1,5 +1,7 @@
 package softuni.WatchUSeek.data.models.binding;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class StrapCreateBindingModel {
     private String name;
     private String material;
