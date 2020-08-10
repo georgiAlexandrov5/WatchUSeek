@@ -47,9 +47,12 @@ public class WatchController extends BaseController {
     }
 
     @PostMapping("/add")
-    public ModelAndView addWatchConfirm(@Validated @ModelAttribute(name = "model") WatchCreateBindingModel model,
-                                         Principal principal) {
+    public ModelAndView addWatchConfirm(@ModelAttribute(name = "model") WatchCreateBindingModel model,
+                                         Principal principal, BindingResult bindingResult) {
 
+        if (bindingResult.hasErrors()){
+            return view("watch/add-watch");
+        }
         WatchServiceModel watchServiceModel = this.modelMapper.map(model, WatchServiceModel.class);
         UserServiceModel user = this.userService.findUserByUsername(principal.getName());
 

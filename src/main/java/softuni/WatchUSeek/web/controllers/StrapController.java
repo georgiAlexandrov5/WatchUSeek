@@ -44,7 +44,14 @@ public class StrapController extends BaseController {
 
         this.strapService.addStrap(strapServiceModel);
 
-        return super.redirect("straps/all");
+        return super.redirect("/straps/all");
+    }
+
+    @PostMapping("/edit/{id}")
+    public ModelAndView editStrapConfirm(@PathVariable String id,@ModelAttribute StrapCreateBindingModel model){
+        this.strapService.editById(id, this.modelMapper.map(model, StrapServiceModel.class));
+
+        return super.redirect("/straps/all");
     }
 
     @GetMapping("/all")
@@ -67,12 +74,7 @@ public class StrapController extends BaseController {
         return super.view("strap/edit-strap",modelAndView);
     }
 
-    @PostMapping("/edit/{id}")
-    public ModelAndView editStrapConfirm(@PathVariable String id,@ModelAttribute StrapCreateBindingModel model){
-        this.strapService.editById(id, this.modelMapper.map(model, StrapServiceModel.class));
 
-        return super.redirect("/straps/all");
-    }
 
 
 

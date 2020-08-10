@@ -37,6 +37,10 @@ textarea {
     --input-padding-y: 0.75rem;
 }
 
+.nav-custom {
+    color: rgba(255, 255, 255, .5) !important;
+}
+
 .video-background-holder {
     position: relative;
     background-color: black;

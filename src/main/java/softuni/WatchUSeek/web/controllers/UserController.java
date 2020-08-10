@@ -15,8 +15,9 @@ import softuni.WatchUSeek.data.models.service.UserServiceModel;
 import softuni.WatchUSeek.data.models.view.UserAllViewModel;
 import softuni.WatchUSeek.data.models.view.UserViewModel;
 import softuni.WatchUSeek.service.UserService;
+import softuni.WatchUSeek.validations.user.UserEditValidator;
+import softuni.WatchUSeek.validations.user.UserRegisterValidator;
 
-import javax.management.relation.RoleNotFoundException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Set;
@@ -28,17 +29,25 @@ public class UserController extends BaseController {
 
     private final UserService userService;
     private final ModelMapper mapper;
+    private final UserEditValidator userEditValidator;
+    private final UserRegisterValidator userRegisterValidator;
+
+
 
     @Autowired
-    public UserController(UserService userService, ModelMapper mapper) {
+    public UserController(UserService userService, ModelMapper mapper, UserEditValidator userEditValidator, UserRegisterValidator userRegisterValidator) {
         this.userService = userService;
         this.mapper = mapper;
+        this.userEditValidator = userEditValidator;
+        this.userRegisterValidator = userRegisterValidator;
     }
 
     @GetMapping("/register")
     @PreAuthorize("isAnonymous()")
     @PageTitle("Register User ")
-    public ModelAndView register(@ModelAttribute(name = "model") UserRegisterBindingModel model){
+    public ModelAndView register(@ModelAttribute(name = "model") UserRegisterBindingModel model, ModelAndView modelAndView){
+        modelAndView.addObject("model", model);
+
         return view("user/register");
     }
 
@@ -46,13 +55,17 @@ public class UserController extends BaseController {
     @PostMapping("/register")
     @PreAuthorize("isAnonymous()")
     public ModelAndView registerConfirm( @ModelAttribute(name = "model") UserRegisterBindingModel model,
-                                        BindingResult bindingResult){
-        if(this.passwordsDoesNotMatch(model.getPassword(), model.getConfirmPassword())){
-            bindingResult.addError(new FieldError("model", "password", "Passwords doesn't match."));
-        }
+                                        BindingResult bindingResult, ModelAndView modelAndView){
+        userRegisterValidator.validate(model, bindingResult);
+
         if (bindingResult.hasErrors()) {
-            return view("user/register");
+            model.setPassword(null);
+            model.setConfirmPassword(null);
+            modelAndView.addObject("model", model);
+
+            return view("user/register", modelAndView);
         }
+
         UserServiceModel serviceModel = mapper.map(model, UserServiceModel.class);
         userService.registerUser(serviceModel);
 
@@ -93,16 +106,21 @@ public class UserController extends BaseController {
     @PostMapping("/edit")
     @PreAuthorize("isAuthenticated()")
     public ModelAndView editProfileConfirm( @ModelAttribute(name = "model") UserEditBindingModel model,
-                                           BindingResult bindingResult){
-        if(this.passwordsDoesNotMatch(model.getPassword(), model.getConfirmPassword())){
-            bindingResult.addError(new FieldError("model", "password", "Passwords don't match."));
-        }
+                                           BindingResult bindingResult, ModelAndView modelAndView){
+
+
+        userEditValidator.validate(model, bindingResult);
+
         if (bindingResult.hasErrors()) {
-            return view("user/edit-profile");
+            model.setOldPassword(null);
+            model.setPassword(null);
+            model.setConfirmPassword(null);
+            modelAndView.addObject("model", model);
+            return view("user/edit-profile", modelAndView);
         }
 
         UserServiceModel serviceModel = mapper.map(model, UserServiceModel.class);
-        userService.editUserProfile(serviceModel, model.getOldPassword());
+        this.userService.editUserProfile(serviceModel, model.getOldPassword());
 
         return redirect("/users/profile");
     }

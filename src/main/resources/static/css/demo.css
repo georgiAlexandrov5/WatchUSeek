@@ -20,6 +20,12 @@
     background-position: center;
 }
 
+.bg-image-event {
+    background-image: url('https://watchclicker.com/wp-content/uploads/2019/01/IMG_9139.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
 .bg-image-edit {
     background-image: url('https://k8q7r7a2.stackpathcdn.com/wp-content/uploads/2020/05/Best-of-independent-watchmaking-through-caseback-movement.jpg');
     background-size: cover;

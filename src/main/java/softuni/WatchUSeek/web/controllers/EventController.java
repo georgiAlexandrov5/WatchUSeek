@@ -2,22 +2,18 @@ package softuni.WatchUSeek.web.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import softuni.WatchUSeek.data.models.binding.EventCreateBindingModel;
 
-import softuni.WatchUSeek.data.models.binding.WatchCreateBindingModel;
 import softuni.WatchUSeek.data.models.service.EventServiceModel;
-import softuni.WatchUSeek.data.models.service.WatchServiceModel;
-import softuni.WatchUSeek.repositories.EventRepository;
+import softuni.WatchUSeek.data.models.view.EventViewModel;
+import softuni.WatchUSeek.data.models.view.StrapViewModel;
 import softuni.WatchUSeek.service.EventService;
 
 import java.security.Principal;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -65,7 +61,7 @@ public class EventController extends BaseController {
     @PreAuthorize("isAuthenticated()")
     @PageTitle("Event Details")
     public ModelAndView eventDetails(@PathVariable String id, ModelAndView modelAndView) {
-        EventServiceModel event = this.eventService.findEventById(id);
+        EventViewModel event = this.mapper.map(this.eventService.findEventById(id), EventViewModel.class);
         modelAndView.addObject("event", event);
         return super.view("event/details-event", modelAndView);
     }

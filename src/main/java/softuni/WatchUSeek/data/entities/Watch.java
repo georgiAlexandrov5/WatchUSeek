@@ -1,5 +1,7 @@
 package softuni.WatchUSeek.data.entities;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,6 +24,7 @@ public class Watch extends BaseEntity {
     }
 
     @Column(name = "manufacturer", nullable = false)
+    @NotNull
     public String getManufacturer() {
         return manufacturer;
     }

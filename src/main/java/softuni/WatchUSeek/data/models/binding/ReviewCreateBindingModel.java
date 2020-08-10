@@ -1,5 +1,7 @@
 package softuni.WatchUSeek.data.models.binding;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ReviewCreateBindingModel {
     private String title;
     private String description;

@@ -50,16 +50,17 @@
                 </div>
             </div>
             <div>
+                <th:block th:if="${enableEdit}">
+                    <form th:action="@{/watches/edit/{id}(id=${watch.id})}" th:method="get">
+                        <button type="submit" class="btn btn-success">Edit Watch</button>
+                    </form>
+                </th:block>
                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                     <form th:action="@{/watches/delete/{id}(id=${watch.id})}" th:method="post">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </th:block>
-                <th:block th:if="${enableEdit}">
-                    <form th:action="@{/watches/edit/{id}(id=${watch.id})}" th:method="get">
-                        <button type="submit" class="btn btn-danger">Edit Watch</button>
-                    </form>
-                </th:block>
+
             </div>
 
 
