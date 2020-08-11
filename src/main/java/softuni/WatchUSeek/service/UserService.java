@@ -17,5 +17,11 @@ public interface UserService extends UserDetailsService {
 
     void makeAdmin(String id);
 
+    UserServiceModel findById(String id);
+
+    UserServiceModel checkIfUsernameExists(String username);
+
+
+
 
 }

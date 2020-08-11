@@ -31,7 +31,7 @@ public class EventServiceImpl implements EventService {
     public EventServiceModel createEvent(EventServiceModel eventServiceModel) {
         Event event = this.mapper.map(eventServiceModel, Event.class);
 
-        return this.mapper.map(this.eventRepository.saveAndFlush(event), EventServiceModel.class);
+        return this.mapper.map(this.eventRepository.save(event), EventServiceModel.class);
 
     }
 

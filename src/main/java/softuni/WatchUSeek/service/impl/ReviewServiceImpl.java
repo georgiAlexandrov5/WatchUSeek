@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import softuni.WatchUSeek.data.entities.Review;
 import softuni.WatchUSeek.data.models.service.ReviewServiceModel;
 import softuni.WatchUSeek.errors.EventNotFoundException;
+import softuni.WatchUSeek.errors.ReviewNotFoundException;
 import softuni.WatchUSeek.repositories.ReviewRepository;
 import softuni.WatchUSeek.service.ReviewService;
 
@@ -38,13 +39,13 @@ public class ReviewServiceImpl implements ReviewService {
     public ReviewServiceModel findReviewById(String id) {
         return this.reviewRepository.findById(id)
                 .map(r -> this.mapper.map(r, ReviewServiceModel.class))
-                .orElseThrow(() -> new EventNotFoundException(REVIEW_NOT_FOUND));
+                .orElseThrow(() -> new ReviewNotFoundException(REVIEW_NOT_FOUND));
     }
 
     @Override
     public void deleteReview(String id) {
         Review event = this.reviewRepository.findById(id)
-                .orElseThrow(() -> new EventNotFoundException(EVENT_NOT_FOUND));
+                .orElseThrow(() -> new ReviewNotFoundException(EVENT_NOT_FOUND));
 
         this.reviewRepository.delete(event);
     }

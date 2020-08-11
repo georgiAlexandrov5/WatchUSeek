@@ -39,6 +39,12 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Override
+    public UserServiceModel findById(String id) {
+        User user = this.userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(USER_ID_NOT_FOUND));
+        return this.mapper.map(user, UserServiceModel.class);
+    }
 
     @Override
     public void registerUser(UserServiceModel userServiceModel) {
@@ -107,6 +113,15 @@ public class UserServiceImpl implements UserService {
         return userRepository
                 .findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(USERNAME_NOT_FOUND));
+    }
+
+    @Override
+    public UserServiceModel checkIfUsernameExists(String username) {
+        User user = this.userRepository.findByUsername(username).orElse(null);
+        if (user == null) {
+            return null;
+        }
+        return this.mapper.map(user, UserServiceModel.class);
     }
 
     public UserServiceModel findUserByIdAndGetAuth(String id) {
