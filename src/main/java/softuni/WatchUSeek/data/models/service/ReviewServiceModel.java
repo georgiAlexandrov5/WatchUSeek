@@ -1,6 +1,6 @@
 package softuni.WatchUSeek.data.models.service;
 
-public class ReviewServiceModel extends BaseServiceModel {
+public class    ReviewServiceModel extends BaseServiceModel {
 
     private String title;
     private String description;

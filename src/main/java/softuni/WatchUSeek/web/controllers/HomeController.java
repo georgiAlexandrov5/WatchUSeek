@@ -10,16 +10,21 @@ public class HomeController extends BaseController {
 
     @GetMapping("/")
     @PreAuthorize("isAnonymous()")
-
+    @PageTitle
     public ModelAndView index(){
-        return super.view("index");
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("index");
+        return modelAndView;
     }
 
     @GetMapping("/home")
     @PreAuthorize("isAuthenticated()")
-
+    @PageTitle(" Home")
     public ModelAndView home(){
-        return super.view("home");
+
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("home");
+        return modelAndView;
     }
 
 }
