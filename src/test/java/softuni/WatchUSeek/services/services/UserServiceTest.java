@@ -12,8 +12,8 @@ import softuni.WatchUSeek.data.entities.User;
 import softuni.WatchUSeek.data.models.service.UserServiceModel;
 import softuni.WatchUSeek.errors.UserNotFoundException;
 import softuni.WatchUSeek.repositories.UserRepository;
-import softuni.WatchUSeek.service.RoleService;
-import softuni.WatchUSeek.service.UserService;
+import softuni.WatchUSeek.service.interfaces.RoleService;
+import softuni.WatchUSeek.service.interfaces.UserService;
 import softuni.WatchUSeek.services.base.ServiceTestBase;
 import softuni.WatchUSeek.validations.user.UserRegisterValidator;
 

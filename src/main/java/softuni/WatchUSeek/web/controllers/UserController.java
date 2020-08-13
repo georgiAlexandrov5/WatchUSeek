@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import softuni.WatchUSeek.data.models.binding.UserEditBindingModel;
@@ -14,7 +13,7 @@ import softuni.WatchUSeek.data.models.service.RoleServiceModel;
 import softuni.WatchUSeek.data.models.service.UserServiceModel;
 import softuni.WatchUSeek.data.models.view.UserAllViewModel;
 import softuni.WatchUSeek.data.models.view.UserViewModel;
-import softuni.WatchUSeek.service.UserService;
+import softuni.WatchUSeek.service.interfaces.UserService;
 import softuni.WatchUSeek.validations.user.UserEditValidator;
 import softuni.WatchUSeek.validations.user.UserRegisterValidator;
 

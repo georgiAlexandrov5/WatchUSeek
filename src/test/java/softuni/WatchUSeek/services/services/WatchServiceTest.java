@@ -1,6 +1,5 @@
 package softuni.WatchUSeek.services.services;
 
-import com.sun.xml.bind.v2.TODO;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,7 @@ import softuni.WatchUSeek.data.entities.Watch;
 import softuni.WatchUSeek.data.models.service.WatchServiceModel;
 import softuni.WatchUSeek.errors.WatchNotFoundException;
 import softuni.WatchUSeek.repositories.WatchRepository;
-import softuni.WatchUSeek.service.WatchService;
+import softuni.WatchUSeek.service.interfaces.WatchService;
 import softuni.WatchUSeek.services.base.ServiceTestBase;
 
 import java.util.ArrayList;

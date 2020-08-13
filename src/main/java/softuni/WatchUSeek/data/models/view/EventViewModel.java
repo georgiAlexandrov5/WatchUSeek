@@ -1,6 +1,7 @@
 package softuni.WatchUSeek.data.models.view;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class EventViewModel {
@@ -9,8 +10,7 @@ public class EventViewModel {
     private String title;
     private String description;
     private String location;
-
-    private Date date;
+    private LocalDate date;
 
     public EventViewModel() {
     }
@@ -47,11 +47,11 @@ public class EventViewModel {
         this.location = location;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }

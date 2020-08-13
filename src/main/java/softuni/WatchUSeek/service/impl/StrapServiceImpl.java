@@ -5,30 +5,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import softuni.WatchUSeek.data.entities.Strap;
 import softuni.WatchUSeek.data.models.service.StrapServiceModel;
+import softuni.WatchUSeek.errors.EntityNotSavedException;
 import softuni.WatchUSeek.errors.StrapNotFoundException;
 import softuni.WatchUSeek.repositories.StrapRepository;
-import softuni.WatchUSeek.service.StrapService;
+import softuni.WatchUSeek.service.interfaces.StrapService;
+import softuni.WatchUSeek.service.validations.StrapServiceModelValidator;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static softuni.WatchUSeek.errors.Constants.STRAP_NOT_FOUND;
+import static softuni.WatchUSeek.service.validations.ValidationConstants.ENTITY_NOT_SAVED;
 
 @Service
 public class StrapServiceImpl implements StrapService {
 
     private final ModelMapper mapper;
     private final StrapRepository strapRepository;
+    private final StrapServiceModelValidator validator;
 
     @Autowired
-    public StrapServiceImpl(ModelMapper mapper, StrapRepository strapRepository) {
+    public StrapServiceImpl(ModelMapper mapper, StrapRepository strapRepository, StrapServiceModelValidator validator) {
         this.mapper = mapper;
         this.strapRepository = strapRepository;
+        this.validator = validator;
     }
 
 
     @Override
     public void addStrap(StrapServiceModel strapServiceModel) {
+        if (!validator.isValid(strapServiceModel)) {
+            throw new EntityNotSavedException(ENTITY_NOT_SAVED);
+        }
         Strap strap = this.mapper.map(strapServiceModel, Strap.class);
         this.strapRepository.save(strap);
     }
@@ -57,6 +65,10 @@ public class StrapServiceImpl implements StrapService {
 
     @Override
     public void editById(String id, StrapServiceModel strapServiceModel) {
+
+        if (!validator.isValid(strapServiceModel)) {
+            throw new EntityNotSavedException(ENTITY_NOT_SAVED);
+        }
         Strap strap = this.getStrapById(id);
 
         strap.setDescription(strapServiceModel.getDescription());

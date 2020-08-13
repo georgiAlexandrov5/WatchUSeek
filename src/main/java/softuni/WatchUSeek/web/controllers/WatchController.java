@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import softuni.WatchUSeek.data.entities.User;
@@ -14,11 +13,11 @@ import softuni.WatchUSeek.data.models.service.UserServiceModel;
 import softuni.WatchUSeek.data.models.service.WatchServiceModel;
 import softuni.WatchUSeek.data.models.view.WatchViewModel;
 import softuni.WatchUSeek.errors.WatchNotFoundException;
-import softuni.WatchUSeek.service.UserService;
-import softuni.WatchUSeek.service.WatchService;
+import softuni.WatchUSeek.service.interfaces.UserService;
+import softuni.WatchUSeek.service.interfaces.WatchService;
 import softuni.WatchUSeek.utils.CloudinaryService;
+import softuni.WatchUSeek.validations.watch.WatchAddValidator;
 
-import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -30,14 +29,16 @@ public class WatchController extends BaseController {
     private final WatchService watchService;
     private final UserService userService;
     private final CloudinaryService cloudinaryService;
+    private final WatchAddValidator watchAddValidator;
 
 
     @Autowired
-    public WatchController(ModelMapper modelMapper, WatchService watchService, UserService userService, CloudinaryService cloudinaryService) {
+    public WatchController(ModelMapper modelMapper, WatchService watchService, UserService userService, CloudinaryService cloudinaryService, WatchAddValidator watchAddValidator) {
         this.modelMapper = modelMapper;
         this.watchService = watchService;
         this.userService = userService;
         this.cloudinaryService = cloudinaryService;
+        this.watchAddValidator = watchAddValidator;
     }
 
     @GetMapping("/add")
@@ -47,10 +48,15 @@ public class WatchController extends BaseController {
     }
 
     @PostMapping("/add")
-    public ModelAndView addWatchConfirm(@ModelAttribute(name = "model") WatchCreateBindingModel model,
-                                         Principal principal, BindingResult bindingResult) {
+    public ModelAndView addWatchConfirm(ModelAndView modelAndView,
+                                        @ModelAttribute(name = "model") WatchCreateBindingModel model,
+                                        Principal principal,
+                                        BindingResult bindingResult) {
 
+        watchAddValidator.validate(model, bindingResult);
         if (bindingResult.hasErrors()){
+            modelAndView.addObject("model", model);
+
             return view("watch/add-watch");
         }
         WatchServiceModel watchServiceModel = this.modelMapper.map(model, WatchServiceModel.class);

@@ -10,8 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 import softuni.WatchUSeek.data.models.binding.ReviewCreateBindingModel;
 import softuni.WatchUSeek.data.models.service.ReviewServiceModel;
 import softuni.WatchUSeek.data.models.view.ReviewViewModel;
-import softuni.WatchUSeek.service.ReviewService;
+import softuni.WatchUSeek.service.interfaces.ReviewService;
 import softuni.WatchUSeek.utils.CloudinaryService;
+import softuni.WatchUSeek.validations.review.ReviewAddValidator;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,13 +23,15 @@ public class ReviewController extends BaseController {
     private final ModelMapper mapper;
     private final ReviewService reviewService;
     private final CloudinaryService cloudinaryService;
+    private final ReviewAddValidator validator;
 
 
     @Autowired
-    public ReviewController(ModelMapper mapper, ReviewService reviewService, CloudinaryService cloudinaryService) {
+    public ReviewController(ModelMapper mapper, ReviewService reviewService, CloudinaryService cloudinaryService, ReviewAddValidator validator) {
         this.mapper = mapper;
         this.reviewService = reviewService;
         this.cloudinaryService = cloudinaryService;
+        this.validator = validator;
     }
 
 
@@ -43,7 +46,16 @@ public class ReviewController extends BaseController {
 
     @PostMapping("/add")
     public ModelAndView addReviewConfirm(@ModelAttribute(name = "model") ReviewCreateBindingModel model,
-                                         BindingResult bindingResult) throws IOException {
+                                         BindingResult bindingResult,
+                                         ModelAndView modelAndView,
+                                         ReviewAddValidator validator) throws IOException {
+
+        validator.validate(model, bindingResult);
+        if (bindingResult.hasErrors()){
+            modelAndView.addObject("model", model);
+
+            return view("review/add-review");
+        }
 
         ReviewServiceModel reviewServiceModel = this.mapper.map(model, ReviewServiceModel.class);
   //      reviewServiceModel.setPictureUrl(this.cloudinaryService.uploadImage(model.getPictureUrl()));

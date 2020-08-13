@@ -5,35 +5,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import softuni.WatchUSeek.data.entities.Watch;
 import softuni.WatchUSeek.data.models.service.WatchServiceModel;
+import softuni.WatchUSeek.errors.EntityNotSavedException;
 import softuni.WatchUSeek.errors.WatchNotFoundException;
 import softuni.WatchUSeek.repositories.UserRepository;
 import softuni.WatchUSeek.repositories.WatchRepository;
-import softuni.WatchUSeek.service.WatchService;
+import softuni.WatchUSeek.service.interfaces.WatchService;
+import softuni.WatchUSeek.service.validations.WatchServiceModelValidator;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static softuni.WatchUSeek.errors.Constants.WATCH_NOT_FOUND;
+import static softuni.WatchUSeek.service.validations.ValidationConstants.ENTITY_NOT_SAVED;
 
 @Service
 public class WatchServiceImpl implements WatchService {
 
+
     private final WatchRepository watchRepository;
     private final UserRepository userRepository;
     private final ModelMapper mapper;
+    private final WatchServiceModelValidator validator;
 
     @Autowired
     public WatchServiceImpl(WatchRepository watchRepository,
                             UserRepository userRepository,
-                            ModelMapper modelMapper) {
+                            ModelMapper modelMapper, WatchServiceModelValidator validator) {
         this.watchRepository = watchRepository;
         this.userRepository = userRepository;
         this.mapper = modelMapper;
-}
+        this.validator = validator;
+    }
 
 
     @Override
     public void addWatch(WatchServiceModel watchServiceModel) {
+        if (!validator.isValid(watchServiceModel)) {
+            throw new EntityNotSavedException(ENTITY_NOT_SAVED);
+        }
         Watch watch = this.mapper.map(watchServiceModel, Watch.class);
         this.watchRepository.save(watch);
 
@@ -63,6 +72,9 @@ public class WatchServiceImpl implements WatchService {
 
     @Override
     public void editById(String id, WatchServiceModel watchServiceModel) {
+        if (!validator.isValid(watchServiceModel)) {
+            throw new EntityNotSavedException(ENTITY_NOT_SAVED);
+        }
         Watch watch = this.getWatchById(id);
 
         watch.setDescription(watchServiceModel.getDescription());

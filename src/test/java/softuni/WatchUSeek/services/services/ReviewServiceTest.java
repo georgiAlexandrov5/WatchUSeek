@@ -8,11 +8,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import softuni.WatchUSeek.data.entities.Review;
-import softuni.WatchUSeek.data.entities.Watch;
 import softuni.WatchUSeek.data.models.service.ReviewServiceModel;
 import softuni.WatchUSeek.errors.ReviewNotFoundException;
 import softuni.WatchUSeek.repositories.ReviewRepository;
-import softuni.WatchUSeek.service.ReviewService;
+import softuni.WatchUSeek.service.interfaces.ReviewService;
 import softuni.WatchUSeek.services.base.ServiceTestBase;
 
 import java.util.ArrayList;

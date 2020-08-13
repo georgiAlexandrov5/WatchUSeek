@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import softuni.WatchUSeek.data.entities.Role;
 import softuni.WatchUSeek.data.models.service.RoleServiceModel;
 import softuni.WatchUSeek.repositories.RoleRepository;
-import softuni.WatchUSeek.service.RoleService;
+import softuni.WatchUSeek.service.interfaces.RoleService;
 
 import java.util.Set;
 import java.util.stream.Collectors;

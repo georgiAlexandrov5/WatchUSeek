@@ -9,10 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import softuni.WatchUSeek.data.entities.Strap;
 import softuni.WatchUSeek.data.models.service.StrapServiceModel;
-import softuni.WatchUSeek.data.models.service.WatchServiceModel;
 import softuni.WatchUSeek.errors.StrapNotFoundException;
 import softuni.WatchUSeek.repositories.StrapRepository;
-import softuni.WatchUSeek.service.StrapService;
+import softuni.WatchUSeek.service.interfaces.StrapService;
 import softuni.WatchUSeek.services.base.ServiceTestBase;
 
 import java.util.ArrayList;

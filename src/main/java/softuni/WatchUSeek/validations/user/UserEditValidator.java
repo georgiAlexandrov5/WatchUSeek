@@ -8,7 +8,7 @@ import softuni.WatchUSeek.data.models.binding.UserEditBindingModel;
 import softuni.WatchUSeek.repositories.UserRepository;
 import softuni.WatchUSeek.validations.annotation.Validator;
 
-import static softuni.WatchUSeek.validations.user.ValidationConstants.*;
+import static softuni.WatchUSeek.validations.user.UserValidationConstants.*;
 
 @Validator
 public class UserEditValidator implements org.springframework.validation.Validator {

@@ -9,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import softuni.WatchUSeek.data.entities.Role;
 import softuni.WatchUSeek.data.models.service.RoleServiceModel;
 import softuni.WatchUSeek.repositories.RoleRepository;
-import softuni.WatchUSeek.service.RoleService;
+import softuni.WatchUSeek.service.interfaces.RoleService;
 import softuni.WatchUSeek.services.base.ServiceTestBase;
 
 import java.util.ArrayList;

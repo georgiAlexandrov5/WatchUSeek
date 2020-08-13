@@ -4,14 +4,15 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import softuni.WatchUSeek.data.models.binding.EventCreateBindingModel;
 
 import softuni.WatchUSeek.data.models.service.EventServiceModel;
 import softuni.WatchUSeek.data.models.view.EventViewModel;
-import softuni.WatchUSeek.data.models.view.StrapViewModel;
-import softuni.WatchUSeek.service.EventService;
+import softuni.WatchUSeek.service.interfaces.EventService;
+import softuni.WatchUSeek.validations.event.EventAddValidator;
 
 import java.security.Principal;
 import java.util.List;
@@ -22,11 +23,13 @@ public class EventController extends BaseController {
 
     private final ModelMapper mapper;
     private final EventService eventService;
+    private final EventAddValidator validator;
 
     @Autowired
-    public EventController(ModelMapper mapper, EventService eventService) {
+    public EventController(ModelMapper mapper, EventService eventService, EventAddValidator validator) {
         this.mapper = mapper;
         this.eventService = eventService;
+        this.validator = validator;
     }
 
 
@@ -39,13 +42,16 @@ public class EventController extends BaseController {
 
     @PostMapping("/add")
     public ModelAndView addEventConfirm(@ModelAttribute(name = "model") EventCreateBindingModel model,
-                                        Principal principal) {
+                                       ModelAndView modelAndView, BindingResult bindingResult) {
 
+        validator.validate(model, bindingResult);
+        if (bindingResult.hasErrors()){
+            modelAndView.addObject("model", model);
+            return view("event/add-event");
+        }
         EventServiceModel eventServiceModel = this.mapper.map(model, EventServiceModel.class);
 
         this.eventService.createEvent(eventServiceModel);
-        System.out.println(principal);
-
         return super.redirect("/events/all");
     }
 

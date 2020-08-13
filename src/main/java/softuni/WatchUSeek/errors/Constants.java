@@ -12,13 +12,9 @@ public class Constants {
 
     public static final String ROLE_USER = "ROLE_USER";
 
-    public static final String ROLE_MODERATOR = "ROLE_MODERATOR";
-
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
 
     public static final String ROLE_ROOT = "ROLE_ROOT";
-
-    public static final String INCORRECT_ID = "Incorrect id!";
 
     public static final String EVENT_NOT_FOUND = "Event with this name doesn't exist!";
 

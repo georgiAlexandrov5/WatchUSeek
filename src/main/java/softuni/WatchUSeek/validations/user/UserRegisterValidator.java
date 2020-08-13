@@ -2,7 +2,6 @@ package softuni.WatchUSeek.validations.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 import softuni.WatchUSeek.data.models.binding.UserRegisterBindingModel;
 import softuni.WatchUSeek.repositories.UserRepository;
 
@@ -30,24 +29,24 @@ public class UserRegisterValidator implements org.springframework.validation.Val
                 userRegisterBindingModel.getUsername().isEmpty()) {
             errors.rejectValue(
                     "username",
-                    ValidationConstants.USERNAME_CAN_NOT_BE_EMPTY,
-                    ValidationConstants.USERNAME_CAN_NOT_BE_EMPTY
+                    UserValidationConstants.USERNAME_CAN_NOT_BE_EMPTY,
+                    UserValidationConstants.USERNAME_CAN_NOT_BE_EMPTY
             );
         }
         if (userRegisterBindingModel.getPassword() == null ||
                 userRegisterBindingModel.getPassword().isEmpty()) {
             errors.rejectValue(
                     "password",
-                    ValidationConstants.PASSWORD_CANT_BE_EMPTY,
-                    ValidationConstants.PASSWORD_CANT_BE_EMPTY
+                    UserValidationConstants.PASSWORD_CANT_BE_EMPTY,
+                    UserValidationConstants.PASSWORD_CANT_BE_EMPTY
             );
         }
         if (userRegisterBindingModel.getEmail() == null ||
                 userRegisterBindingModel.getEmail().isEmpty()) {
             errors.rejectValue(
                     "email",
-                    ValidationConstants.EMAIL_CANT_BE_EMPTY,
-                    ValidationConstants.EMAIL_CANT_BE_EMPTY
+                    UserValidationConstants.EMAIL_CANT_BE_EMPTY,
+                    UserValidationConstants.EMAIL_CANT_BE_EMPTY
             );
         }
         if (errors.hasErrors()){
@@ -58,35 +57,35 @@ public class UserRegisterValidator implements org.springframework.validation.Val
         if (this.userRepository.findByUsername(userRegisterBindingModel.getUsername()).isPresent()) {
             errors.rejectValue(
                     "username",
-                    String.format(ValidationConstants.USERNAME_ALREADY_EXISTS, userRegisterBindingModel.getUsername()),
-                    String.format(ValidationConstants.USERNAME_ALREADY_EXISTS, userRegisterBindingModel.getUsername())
+                    String.format(UserValidationConstants.USERNAME_ALREADY_EXISTS, userRegisterBindingModel.getUsername()),
+                    String.format(UserValidationConstants.USERNAME_ALREADY_EXISTS, userRegisterBindingModel.getUsername())
             );
         }
 
-        if (userRegisterBindingModel.getUsername().length() < ValidationConstants.USERNAME_MIN_LENGTH ||
-                userRegisterBindingModel.getUsername().length() > ValidationConstants.USERNAME_MAX_LENGTH) {
+        if (userRegisterBindingModel.getUsername().length() < UserValidationConstants.USERNAME_MIN_LENGTH ||
+                userRegisterBindingModel.getUsername().length() > UserValidationConstants.USERNAME_MAX_LENGTH) {
             errors.rejectValue(
                     "username",
-                    String.format(ValidationConstants.USERNAME_LENGTH, ValidationConstants.USERNAME_MIN_LENGTH,
-                            ValidationConstants.USERNAME_MAX_LENGTH),
-                    String.format(ValidationConstants.USERNAME_LENGTH, ValidationConstants.USERNAME_MIN_LENGTH,
-                            ValidationConstants.USERNAME_MAX_LENGTH)
+                    String.format(UserValidationConstants.USERNAME_LENGTH, UserValidationConstants.USERNAME_MIN_LENGTH,
+                            UserValidationConstants.USERNAME_MAX_LENGTH),
+                    String.format(UserValidationConstants.USERNAME_LENGTH, UserValidationConstants.USERNAME_MIN_LENGTH,
+                            UserValidationConstants.USERNAME_MAX_LENGTH)
             );
         }
 
         if (!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
             errors.rejectValue(
                     "password",
-                    ValidationConstants.PASSWORDS_DO_NOT_MATCH,
-                    ValidationConstants.PASSWORDS_DO_NOT_MATCH
+                    UserValidationConstants.PASSWORDS_DO_NOT_MATCH,
+                    UserValidationConstants.PASSWORDS_DO_NOT_MATCH
             );
         }
 
         if (this.userRepository.findByEmail(userRegisterBindingModel.getEmail()).isPresent()) {
             errors.rejectValue(
                     "email",
-                    String.format(ValidationConstants.EMAIL_ALREADY_EXISTS, userRegisterBindingModel.getEmail()),
-                    String.format(ValidationConstants.EMAIL_ALREADY_EXISTS, userRegisterBindingModel.getEmail())
+                    String.format(UserValidationConstants.EMAIL_ALREADY_EXISTS, userRegisterBindingModel.getEmail()),
+                    String.format(UserValidationConstants.EMAIL_ALREADY_EXISTS, userRegisterBindingModel.getEmail())
             );
         }
     }

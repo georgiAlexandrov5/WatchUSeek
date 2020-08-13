@@ -9,10 +9,13 @@ import org.springframework.stereotype.Service;
 import softuni.WatchUSeek.data.entities.User;
 import softuni.WatchUSeek.data.models.service.UserServiceModel;
 import softuni.WatchUSeek.errors.Constants;
+import softuni.WatchUSeek.errors.UserNameNotFreeException;
 import softuni.WatchUSeek.errors.UserNotFoundException;
+import softuni.WatchUSeek.errors.UserWrongCredentialsException;
 import softuni.WatchUSeek.repositories.UserRepository;
-import softuni.WatchUSeek.service.RoleService;
-import softuni.WatchUSeek.service.UserService;
+import softuni.WatchUSeek.service.interfaces.RoleService;
+import softuni.WatchUSeek.service.interfaces.UserService;
+import softuni.WatchUSeek.service.validations.UserServiceModelValidator;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -23,20 +26,28 @@ import static softuni.WatchUSeek.errors.Constants.*;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private static final String USERNAME_INVALID_CREDENTIALS = "Account was not created, invalid credentials!";
+    private static final String USERNAME_IS_NOT_FREE = "This username is already taken!";
+    private static final String INCORRECT_PASSWORD = "Incorrect password";
+
+
+
     private final UserRepository userRepository;
     private final ModelMapper mapper;
     private final RoleService roleService;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final UserServiceModelValidator validator;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
                            ModelMapper mapper,
                            RoleService roleService,
-                           BCryptPasswordEncoder passwordEncoder) {
+                           BCryptPasswordEncoder passwordEncoder, UserServiceModelValidator validator) {
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
+        this.validator = validator;
     }
 
     @Override
@@ -48,6 +59,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(UserServiceModel userServiceModel) {
+        if (!validator.isValid(userServiceModel)) {
+            throw new UserWrongCredentialsException(USERNAME_INVALID_CREDENTIALS);
+        }
+
+        if (this.userRepository.findByUsername(userServiceModel.getUsername()).isPresent()) {
+            throw new UserNameNotFreeException(USERNAME_IS_NOT_FREE);
+        }
         this.roleService.seedRoles();
 
         if (this.userRepository.count() == 0) {
@@ -77,7 +95,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new UsernameNotFoundException(USER_ID_NOT_FOUND));
 
         if (!this.passwordEncoder.matches(oldPassword, user.getPassword())) {
-            throw new IllegalArgumentException("NOT CORRECT");
+            throw new IllegalArgumentException(INCORRECT_PASSWORD);
         }
 
         user.setPassword(userServiceModel.getPassword().isEmpty() ?
@@ -87,7 +105,6 @@ public class UserServiceImpl implements UserService {
 
         return this.mapper.map(this.userRepository.saveAndFlush(user), UserServiceModel.class);
     }
-
 
 
     @Override
@@ -105,7 +122,6 @@ public class UserServiceImpl implements UserService {
 
         this.userRepository.saveAndFlush(this.mapper.map(userServiceModel, User.class));
     }
-
 
 
     @Override

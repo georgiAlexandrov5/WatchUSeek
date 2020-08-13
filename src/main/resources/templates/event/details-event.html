@@ -17,7 +17,7 @@
             </div>
             <div class="row">
                 <div class="col col-md-12 mt-3 text-white">
-                    <h1 th:utext="${event.title}"></h1>
+                    <h2 th:utext="${event.title}"></h2>
                 </div>
             </div>
             <div class="row">
@@ -27,7 +27,7 @@
             </div>
             <div class="row">
                 <div class="col col-md-12 mt-3 text-white">
-                    <h4 th:utext="${event.date}"></h4>
+                    <h4 th:utext="'Date: ' + ${event.date}"></h4>
                 </div>
             </div>
             <p class="multiline">

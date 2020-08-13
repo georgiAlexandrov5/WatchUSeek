@@ -1,4 +1,4 @@
-package softuni.WatchUSeek.service;
+package softuni.WatchUSeek.service.interfaces;
 
 
 import softuni.WatchUSeek.data.models.service.ReviewServiceModel;

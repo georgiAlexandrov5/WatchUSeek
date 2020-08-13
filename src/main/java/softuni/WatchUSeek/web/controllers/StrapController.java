@@ -11,10 +11,10 @@ import softuni.WatchUSeek.data.models.binding.StrapCreateBindingModel;
 import softuni.WatchUSeek.data.models.service.StrapServiceModel;
 import softuni.WatchUSeek.data.models.view.StrapViewModel;
 import softuni.WatchUSeek.errors.StrapNotFoundException;
-import softuni.WatchUSeek.service.StrapService;
+import softuni.WatchUSeek.service.interfaces.StrapService;
 import softuni.WatchUSeek.utils.CloudinaryService;
+import softuni.WatchUSeek.validations.strap.StrapAddValidator;
 
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -24,12 +24,17 @@ public class StrapController extends BaseController {
     private final StrapService strapService;
     private final ModelMapper modelMapper;
     private final CloudinaryService cloudinaryService;
+    private final StrapAddValidator validator;
 
     @Autowired
-    public StrapController(StrapService strapService, ModelMapper modelMapper, CloudinaryService cloudinaryService) {
+    public StrapController(StrapService strapService,
+                           ModelMapper modelMapper,
+                           CloudinaryService cloudinaryService,
+                           StrapAddValidator validator) {
         this.strapService = strapService;
         this.modelMapper = modelMapper;
         this.cloudinaryService = cloudinaryService;
+        this.validator = validator;
     }
 
     @GetMapping("/add")
@@ -39,7 +44,15 @@ public class StrapController extends BaseController {
     }
 
     @PostMapping("/add")
-    public ModelAndView addStrapConfirm(@ModelAttribute(name = "model") StrapCreateBindingModel model) {
+    public ModelAndView addStrapConfirm(@ModelAttribute(name = "model") StrapCreateBindingModel model,
+                                        BindingResult bindingResult,
+                                        ModelAndView modelAndView) {
+
+        validator.validate(model, bindingResult);
+        if (bindingResult.hasErrors()){
+            modelAndView.addObject("model", model);
+            return view("strap/add-strap");
+        }
         StrapServiceModel strapServiceModel = this.modelMapper.map(model, StrapServiceModel.class);
 
         this.strapService.addStrap(strapServiceModel);
@@ -48,7 +61,15 @@ public class StrapController extends BaseController {
     }
 
     @PostMapping("/edit/{id}")
-    public ModelAndView editStrapConfirm(@PathVariable String id,@ModelAttribute StrapCreateBindingModel model){
+    public ModelAndView editStrapConfirm(@PathVariable String id,
+                                         @ModelAttribute StrapCreateBindingModel model,
+                                        ModelAndView modelAndView, BindingResult bindingResult){
+
+        validator.validate(model, bindingResult);
+        if (bindingResult.hasErrors()){
+            modelAndView.addObject("model", model);
+            return view("strap/edit-strap");
+        }
         this.strapService.editById(id, this.modelMapper.map(model, StrapServiceModel.class));
 
         return super.redirect("/straps/all");

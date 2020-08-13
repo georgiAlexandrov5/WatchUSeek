@@ -11,7 +11,7 @@ import softuni.WatchUSeek.data.entities.Event;
 import softuni.WatchUSeek.data.models.service.EventServiceModel;
 import softuni.WatchUSeek.errors.EventNotFoundException;
 import softuni.WatchUSeek.repositories.EventRepository;
-import softuni.WatchUSeek.service.EventService;
+import softuni.WatchUSeek.service.interfaces.EventService;
 import softuni.WatchUSeek.services.base.ServiceTestBase;
 
 import java.time.LocalDate;

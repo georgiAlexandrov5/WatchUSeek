@@ -1,6 +1,6 @@
 package softuni.WatchUSeek.validations.user;
 
-public class ValidationConstants {
+public class UserValidationConstants {
     final static String USERNAME_ALREADY_EXISTS = "Username %s already exists!";
     final static String USERNAME_CAN_NOT_BE_EMPTY = "Username can not be empty!";
 
