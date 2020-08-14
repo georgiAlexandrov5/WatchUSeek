@@ -106,7 +106,6 @@ public class WatchController extends BaseController {
 
         boolean enableEdit = watch.getUser().getUsername()
                 .equals(userService.findUserByUsername(principal.getName()).getUsername());
-        System.out.println(enableEdit);
 
         modelAndView.addObject("enableEdit", enableEdit);
         modelAndView.addObject("watch", watch);

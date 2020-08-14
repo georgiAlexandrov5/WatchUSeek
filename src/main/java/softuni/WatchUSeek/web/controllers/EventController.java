@@ -66,7 +66,7 @@ public class EventController extends BaseController {
     @GetMapping("/details/{id}")
     @PreAuthorize("isAuthenticated()")
     @PageTitle("Event Details")
-    public ModelAndView eventDetails(@PathVariable String id, ModelAndView modelAndView) {
+    public ModelAndView eventDetails(@PathVariable String id, ModelAndView modelAndView, EventViewModel model) {
         EventViewModel event = this.mapper.map(this.eventService.findEventById(id), EventViewModel.class);
         modelAndView.addObject("event", event);
         return super.view("event/details-event", modelAndView);

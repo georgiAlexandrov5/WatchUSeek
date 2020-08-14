@@ -12,7 +12,7 @@ public class ValidationConstants {
     public final static String MANUFACTURER_CAN_NOT_BE_EMPTY = "Manufacturer can not be empty!";
     public final static String REFERENCE_CAN_NOT_BE_EMPTY = "Reference Number can not be empty!";
     public final static String PICTURE_CAN_NOT_BE_EMPTY = "Picture URL can not be empty!";
-    public final static String GENDER_CAN_NOT_BE_EMPTY = "GENDER can not be empty!";
+    public final static String GENDER_CAN_NOT_BE_EMPTY = "Gender can not be empty!";
     public final static String PRICE_CAN_NOT_BE_EMPTY = "Price can not be empty!";
     public final static String CONTACT_CAN_NOT_BE_EMPTY = "Contact Number can not be empty!";
     public final static String INVALID_YEAR = "Invalid year entered";

@@ -106,6 +106,7 @@ public class StrapController extends BaseController {
     @PageTitle("Strap Details")
     public ModelAndView strapDetails(@PathVariable String id, ModelAndView modelAndView) {
         StrapViewModel strap = this.modelMapper.map(this.strapService.findStrapById(id), StrapViewModel.class);
+
         modelAndView.addObject("strap",strap);
         return super.view("strap/details-strap", modelAndView);
     }

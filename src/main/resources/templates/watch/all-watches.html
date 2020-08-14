@@ -16,14 +16,14 @@
             <table class="table table-hover w-75 mx-auto">
                 <thead>
                 <tr class="row mx-auto" >
-                    <th class="col-md-1 text-center text-white">#</th>
+                    <th class="col-md-1 text-center text-white">Details</th>
                     <th class="col-md-3 text-center text-white">Manufacturer</th>
                     <th class="col-md-2 text-center text-white">Price</th>
                     <th class="col-md-2 text-center text-white">Gender</th>
-                    <th class="col-md-2 text-center text-white">Details</th>
+                    <th class="col-md-2 text-center text-white">#</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id = "watches-table">
                 <th:block th:each="watch, iter : ${watches}">
                     <tr class="row mx-auto">
                         <th class="col-md-1 text-center text-white" th:utext="${iter.index + 1}"></th>
@@ -36,6 +36,8 @@
                         </td>
                     </tr>
                 </th:block>
+
+
                 </tbody>
             </table>
             <hr class="hr-2 bg-dark">

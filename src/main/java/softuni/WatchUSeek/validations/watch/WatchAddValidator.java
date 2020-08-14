@@ -44,7 +44,7 @@ public class WatchAddValidator implements org.springframework.validation.Validat
                 || watchCreateBindingModel.getGender().isEmpty()) {
             errors.rejectValue("gender", GENDER_CAN_NOT_BE_EMPTY, GENDER_CAN_NOT_BE_EMPTY);
         }
-        if (watchCreateBindingModel.getPrice() <= 0) {
+        if (watchCreateBindingModel.getPrice() == 0) {
             errors.rejectValue("price", PRICE_CAN_NOT_BE_EMPTY, PRICE_CAN_NOT_BE_EMPTY);
         }
         if (watchCreateBindingModel.getContactNumber() == null
@@ -52,7 +52,7 @@ public class WatchAddValidator implements org.springframework.validation.Validat
             errors.rejectValue("contactNumber", CONTACT_CAN_NOT_BE_EMPTY, CONTACT_CAN_NOT_BE_EMPTY);
         }
         if (watchCreateBindingModel.getYear() <= 1850
-                || watchCreateBindingModel.getYear() > 2020) {
+                || watchCreateBindingModel.getYear() > 2020 ||  watchCreateBindingModel.getYear() == 0) {
             errors.rejectValue("year", INVALID_YEAR, INVALID_YEAR);
         }
 
