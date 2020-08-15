@@ -124,13 +124,14 @@
 }
 
 .bg-review-create {
-    background-image: url('https://magarticles.magzter.com/articles/2107/422541/5e61e447d7a9b/Watchmaking.jpeg');
+    background-image: url('https://watchesbysjx.com/wp-content/uploads/2019/03/Ming-Watch-full-collection.jpeg');
     padding-top: 65px;
-    min-height: 380px;
-    background-position: center;
-    background-repeat: no-repeat;
+    min-height: 820px;
+    /* background-position: center; */
+    /* background-repeat: no-repeat; */
     background-size: cover;
-    position: relative;
+    /* position: relative; */
+}
 }
 
 .bg-image-quote-all {

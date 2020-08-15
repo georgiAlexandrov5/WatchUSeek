@@ -82,6 +82,7 @@ public class WatchController extends BaseController {
         WatchServiceModel watchServiceModel = this.watchService.findWatchById(id);
 
 
+
         modelAndView.addObject("watch", watchServiceModel);
         modelAndView.addObject("watchId", id);
 
@@ -90,7 +91,16 @@ public class WatchController extends BaseController {
     }
 
     @PostMapping("/edit/{id}")
-    public ModelAndView editWatchConfirm(@PathVariable String id, @ModelAttribute WatchCreateBindingModel model) {
+    public ModelAndView editWatchConfirm(@PathVariable String id, @ModelAttribute WatchCreateBindingModel model,
+                                         BindingResult bindingResult, ModelAndView modelAndView) {
+
+        watchAddValidator.validate(model, bindingResult);
+        if (bindingResult.hasErrors()){
+            modelAndView.addObject("model", model);
+
+            return super.redirect("/watches/edit/{id}");
+        }
+
         this.watchService.editById(id, this.modelMapper.map(model, WatchServiceModel.class));
 
         return super.redirect("/watches/all");

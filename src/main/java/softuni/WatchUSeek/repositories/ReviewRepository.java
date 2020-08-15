@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, String> {
 
-   @Query("SELECT r from Review r order by r.rating")
+   @Query("SELECT r FROM Review r ORDER BY r.rating DESC")
     List<Review> findAllAndOrderByRating();
 }

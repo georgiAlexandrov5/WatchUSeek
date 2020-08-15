@@ -17,42 +17,42 @@
             <form id="add-product-form" class="form w-25 mx-auto" th:action="@{/watches/edit/{id}(id=${watchId})}"
                   method="post" enctype="multipart/form-data"><input type="hidden" name="_csrf"
                                                                      value="c686cd14-a7f9-4216-8009-c093b7d3df86">
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label for="watch-manufacturer" class="mb-1">Manufacturer</label>
                     <input type="text" class="form-control mt-1" id="watch-manufacturer" name="manufacturer"
                            th:value="${watch.manufacturer}">
                 </div>
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label for="watch-refNumber" class="mb-1">Reference Number</label>
                     <input type="text" class="form-control mt-1" id="watch-refNumber" name="refNumber"
                            th:value="${watch.refNumber}">
                 </div>
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label for="watch-year" class="mb-1">Year</label>
                     <input type="text" class="form-control mt-1" id="watch-year" name="year"
                            th:value="${watch.year}">
                 </div>
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label for="watch-price" class="mb-1">Price</label>
                     <input type="text" class="form-control mt-1" id="watch-price" name="price"
                            th:value="${watch.price}">
                 </div>
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label for="watch-description" class="mb-1">Description</label>
                     <input type="text" class="form-control mt-1" id="watch-description" name="description"
                            th:value="${watch.description}">
                 </div>
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label for="watch-contactNumber" class="mb-1">Number</label>
                     <input type="text" class="form-control mt-1" id="watch-contactNumber" name="contactNumber"
                            th:value="${watch.contactNumber}">
                 </div>
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label for="watch-gender" class="mb-1">Gender</label>
                     <input type="text" class="form-control mt-1" id="watch-gender" name="gender"
                            th:value="${watch.gender}">
                 </div>
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label for="watch-picUrl" class="mb-1">Picture</label>
                     <input type="text" class="form-control mt-1" id="watch-picUrl" name="picUrl"
                            th:value="${watch.picUrl}">
